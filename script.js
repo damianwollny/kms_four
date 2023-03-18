@@ -1,17 +1,22 @@
-// setup grid container left
+// setup both grid containers
 let grid = document.getElementsByClassName("grid-container");
 function setdimensions(dim){
-    grid.style.gridTemplateColumns = "repeat("+dims+", 1fr)";
-    grid.style.gridTemplateRows = "repeat("+dims+", 1fr)";
+    for (let classmember = 0; classmember < grid.length; classmember++) {
+        console.log(grid[classmember])
+        grid[classmember].style.gridTemplateRows = "repeat("+dim+", 1fr)";
+        grid[classmember].style.gridTemplateColumns = "repeat("+dim+", 1fr)";
+    }
 }
 
-// generate new items within grid container
+// generate new items within both grid containers
 function newgriditem(dim){
-    for (let gridnum = 1; gridnum <= dim ** 2; gridnum++){
-        let griditem = document.createElement("div");
-        griditem.setAttribute("class", "grid-item");
-        griditem.setAttribute("id", gridnum);
-        grid.appendChild(griditem);
+    for (let classmember = 0; classmember < grid.length; classmember++) {
+        for (let gridnum = 1; gridnum <= dim ** 2; gridnum++){
+            let griditem = document.createElement("div");
+            griditem.setAttribute("class", "grid-item");
+            griditem.setAttribute("id", gridnum);
+            grid[classmember].appendChild(griditem);
+        }
     }
 }
 setdimensions(3);

@@ -1,10 +1,15 @@
+.all-containers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
 .grid-container {
-    border: 1px solid black;
+    display: grid;
+    gap: 2px;
     width: 250px;
     height: 250px;
+    padding: 10px;
 }
 .grid-item {
+    display: grid;
     border: 1px solid black;
-    width: 10px;
-    height: 10px;
 }
