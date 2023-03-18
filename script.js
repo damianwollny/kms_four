@@ -16,8 +16,31 @@ function newgriditem(dim){
             griditem.setAttribute("class", "grid-item");
             griditem.setAttribute("id", gridnum);
             grid[classmember].appendChild(griditem);
+            console.log(griditem)
         }
     }
 }
-setdimensions(3);
-newgriditem(3);
+
+// color grid_item in left grid
+function color_grid_items(dim, frac){
+    // generate an array of random numbers < grid.length
+    const ranarray = Array.from({length: (dim ** 2)/frac}, () => Math.floor(Math.random() * dim ** 2)+1);
+    // remove duplicates from array
+    uniq = [...new Set(ranarray)];
+    console.log(ranarray)
+    console.log(uniq)
+    // color griditems
+    for (let gridnum = 0; gridnum < uniq.length; gridnum++) {
+        document.getElementById(uniq[gridnum]).style.backgroundColor = "green";
+        
+    }
+
+}
+
+
+// transform matrix
+
+
+setdimensions(2);
+newgriditem(2);
+color_grid_items(2,3);
