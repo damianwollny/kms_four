@@ -1,6 +1,6 @@
 # kms_four
  
 TO DO:
-- fill grid
+- problem: grid_items from left and right grid have the same id -> need to be unique
 - compare to user input
 - the rest
