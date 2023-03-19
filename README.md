@@ -1,6 +1,6 @@
 # kms_four
  
 TO DO:
-- problem: grid_items from left and right grid have the same id -> need to be unique
+- transform matrix
 - compare to user input
 - the rest
