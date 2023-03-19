@@ -14,7 +14,9 @@ function newgriditem(dim){
         for (let gridnum = 1; gridnum <= dim ** 2; gridnum++){
             let griditem = document.createElement("div");
             griditem.setAttribute("class", "grid-item");
-            griditem.setAttribute("id", gridnum);
+            // left grid has id's: 0-[1:x]
+            // right grid has id's: 1-[1:x]
+            griditem.setAttribute("id", classmember+"-"+gridnum);
             grid[classmember].appendChild(griditem);
             console.log(griditem)
         }
@@ -29,9 +31,9 @@ function color_grid_items(dim, frac){
     uniq = [...new Set(ranarray)];
     console.log(ranarray)
     console.log(uniq)
-    // color griditems
+    // color griditems in left grid
     for (let gridnum = 0; gridnum < uniq.length; gridnum++) {
-        document.getElementById(uniq[gridnum]).style.backgroundColor = "green";
+        document.getElementById("0-"+uniq[gridnum]).style.backgroundColor = "green";
         
     }
 
