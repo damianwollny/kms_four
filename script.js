@@ -2,6 +2,7 @@
 var red_array_clean = [];
 var red_array = [];
 var uniq = [];
+var num_dimensions = 2;
 
 // event listeners
 document.getElementById("restart_button").addEventListener("click", init)
@@ -69,6 +70,7 @@ function transform(arr, dim) {
         for(var i = 0; i < arr.length; i+= dim) {
             matrix.push(arr.slice(i, dim + i));
         }
+        console.log(matrix);
     }else{
         alert("Transformation error")
     }
@@ -99,18 +101,20 @@ function colorbyuser(elem){
 function compareArrays(arr1, arr2){
     // clean up red_array
     var red_clean = arr2.map(x => x.replace("1-", "")).map(Number)
-    // transform red array
-    var dim_array = transform()
-    var red_trans = [];
-    for (let ind = 0; ind < red_clean.length; ind++) {
-        red_trans = array[ind];
-        
+    // transform green array:
+    left_grid = Array.from({length: num_dimensions ** 2}, (_, i) => i + 1)
+    trans_left_grid = transform(left_grid, num_dimensions)
+    // find positions of all 'uniq' in transformed green array
+    for (let p = 0; p < uniq.length; p++) {
+        //console.log(trans_left_grid, uniq[penis], trans_left_grid.indexOf(uniq[penis])+1)
+        tilted_green = [];
+        tilted_green.push(trans_left_grid.indexOf(uniq[p]) + 1);
     }
-    console.log(red_clean, uniq)
-    if (JSON.stringify(arr1.sort()) === JSON.stringify(red_clean.sort())){
-        alert("PEN_IS!")
+    console.log("original green = ", uniq, "tilted green=", tilted_green, "red=", red_clean)
+    if (JSON.stringify(tilted_green.sort()) === JSON.stringify(red_clean.sort())){
+        alert("Richtig!")
     }else{
-        alert("NO PENIS!");
+        alert("Falsch!");
         init();
     }
     red_array = [];
@@ -119,11 +123,12 @@ function compareArrays(arr1, arr2){
 function init(){
 
     remove_divs("grid-item");
-    setdimensions(2);
-    newgriditem(2);
-    color_grid_items(2,3);
-    grid_item_listener(2);
+    setdimensions(num_dimensions);
+    newgriditem(num_dimensions);
+    color_grid_items(num_dimensions, 3);
+    grid_item_listener(num_dimensions);
 }
 
 init();
+console.log("green position=",uniq[0])
 
