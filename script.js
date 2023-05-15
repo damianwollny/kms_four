@@ -3,6 +3,7 @@ var red_array_clean = [];
 var red_array = [];
 var uniq = [];
 var num_dimensions = 2;
+var level = 1;
 
 // event listeners
 document.getElementById("restart_button").addEventListener("click", init)
@@ -18,7 +19,7 @@ function grid_item_listener(dim){
 let grid = document.getElementsByClassName("grid-container");
 function setdimensions(dim){
     for (let classmember = 0; classmember < grid.length; classmember++) {
-        console.log(grid[classmember])
+        //console.log(grid[classmember])
         grid[classmember].style.gridTemplateRows = "repeat("+dim+", 1fr)";
         grid[classmember].style.gridTemplateColumns = "repeat("+dim+", 1fr)";
     }
@@ -34,7 +35,7 @@ function newgriditem(dim){
             // right grid has id's: 1-[1:x]
             griditem.setAttribute("id", classmember+"-"+gridnum);
             grid[classmember].appendChild(griditem);
-            console.log(griditem)
+            //console.log(griditem)
         }
     }
 }
@@ -94,8 +95,7 @@ function colorbyuser(elem){
         // remove grid item from array
         red_array = red_array.filter(function(item) {return item !== elem}) 
     }
-    
-    console.log(red_array)
+    //console.log(red_array)
 }
 
 function compareArrays(arr1, arr2){
@@ -104,15 +104,18 @@ function compareArrays(arr1, arr2){
     // transform green array:
     left_grid = Array.from({length: num_dimensions ** 2}, (_, i) => i + 1)
     trans_left_grid = transform(left_grid, num_dimensions)
+    console.log("left grid=", left_grid);
+    console.log("transformed left grid=", trans_left_grid);
     // find positions of all 'uniq' in transformed green array
     for (let p = 0; p < uniq.length; p++) {
-        //console.log(trans_left_grid, uniq[penis], trans_left_grid.indexOf(uniq[penis])+1)
         tilted_green = [];
         tilted_green.push(trans_left_grid.indexOf(uniq[p]) + 1);
+        console.log("uniq[p]=", uniq[p])
+        console.log("tilted_green=", tilted_green)
     }
     console.log("original green = ", uniq, "tilted green=", tilted_green, "red=", red_clean)
     if (JSON.stringify(tilted_green.sort()) === JSON.stringify(red_clean.sort())){
-        alert("Richtig!")
+        next_level();
     }else{
         alert("Falsch!");
         init();
@@ -120,15 +123,26 @@ function compareArrays(arr1, arr2){
     red_array = [];
 }
 
+// initialize game
 function init(){
-
     remove_divs("grid-item");
     setdimensions(num_dimensions);
     newgriditem(num_dimensions);
     color_grid_items(num_dimensions, 3);
     grid_item_listener(num_dimensions);
+    level=1
+}
+
+// level up
+function next_level(){
+    num_dimensions = num_dimensions+level;
+    remove_divs("grid-item");
+    setdimensions(num_dimensions);
+    newgriditem(num_dimensions);
+    color_grid_items(num_dimensions, 3);
+    grid_item_listener(num_dimensions);
+    level++;
 }
 
 init();
 console.log("green position=",uniq[0])
-
