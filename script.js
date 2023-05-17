@@ -107,9 +107,10 @@ function compareArrays(arr1, arr2){
     console.log("left grid=", left_grid);
     console.log("transformed left grid=", trans_left_grid);
     // find positions of all 'uniq' in transformed green array
+    tilted_green = [];
     for (let p = 0; p < uniq.length; p++) {
-        tilted_green = [];
-        tilted_green.push(trans_left_grid.indexOf(uniq[p]) + 1);
+        tilted_green.push(trans_left_grid.indexOf(uniq[p])+1);
+        console.log("uniq=", uniq)
         console.log("uniq[p]=", uniq[p])
         console.log("tilted_green=", tilted_green)
     }
