@@ -4,10 +4,18 @@ var red_array = [];
 var uniq = [];
 var num_dimensions = 2;
 var level = 1;
+var fraction_of_grid = 6;
+var points = 0;
 
 // event listeners
 document.getElementById("restart_button").addEventListener("click", init)
 document.getElementById("test_button").addEventListener("click", function(){compareArrays(uniq, red_array);})
+// difficulty levels
+document.getElementById("diff1").addEventListener("click", function(){restart(2);})
+document.getElementById("diff2").addEventListener("click", function(){restart(3);})
+document.getElementById("diff3").addEventListener("click", function(){restart(4);})
+document.getElementById("diff4").addEventListener("click", function(){restart(5);})
+document.getElementById("diff5").addEventListener("click", function(){restart(6);})
 // attach event listener to every grid item
 function grid_item_listener(dim){
     for (let i = 1; i <= (dim ** 2); i++) {
@@ -95,7 +103,6 @@ function colorbyuser(elem){
         // remove grid item from array
         red_array = red_array.filter(function(item) {return item !== elem}) 
     }
-    //console.log(red_array)
 }
 
 function compareArrays(arr1, arr2){
@@ -118,31 +125,73 @@ function compareArrays(arr1, arr2){
     if (JSON.stringify(tilted_green.sort()) === JSON.stringify(red_clean.sort())){
         next_level();
     }else{
-        alert("Falsch!");
+        alert("PUNKTE: " + points);
         init();
     }
     red_array = [];
 }
 
+function change_dim(dimensions){
+    num_dimensions = dimensions;
+    console.log(num_dimensions);
+}
+
 // initialize game
-function init(){
+function init(dimensions){
+    points = 0;
+    document.getElementById("title").innerHTML = "PUNKTE: " + (points)
     remove_divs("grid-item");
     setdimensions(num_dimensions);
     newgriditem(num_dimensions);
     color_grid_items(num_dimensions, 3);
     grid_item_listener(num_dimensions);
-    level=1
+}
+
+// initialize game
+function restart(dimensions){
+    num_dimensions = dimensions;
+    console.log(num_dimensions);
+    points = 0;
+    document.getElementById("title").innerHTML = "PUNKTE: " + (points)
+    remove_divs("grid-item");
+    setdimensions(num_dimensions);
+    newgriditem(num_dimensions);
+    color_grid_items(num_dimensions, fraction_of_grid);
+    grid_item_listener(num_dimensions);
 }
 
 // level up
 function next_level(){
-    num_dimensions = num_dimensions+level;
+    // point increase depending on difficulty
+    if (num_dimensions == 2) {
+        points++;
+    } else if (num_dimensions == 3) {
+        points = points + 10
+    } else if (num_dimensions == 4) {
+        points = points + 20
+    } else if (num_dimensions == 5) {
+        points = points + 30
+    } else if (num_dimensions == 6) {
+        points = points + 50
+    }
+    console.log("num_dim=", num_dimensions)
+    console.log("points=", points)
+    // difficulty increases unless num_dim == 2
+    if (fraction_of_grid > 2) {
+        fraction_of_grid = fraction_of_grid - 0.5;
+    }else{
+        fraction_of_grid = 2;
+    }
+    document.getElementById("title").innerHTML = "PUNKTE: " + (points)
     remove_divs("grid-item");
     setdimensions(num_dimensions);
     newgriditem(num_dimensions);
-    color_grid_items(num_dimensions, 3);
+    if (num_dimensions == 2) {
+        color_grid_items(num_dimensions, 3);    
+    }else{
+        color_grid_items(num_dimensions, fraction_of_grid);    
+    }
     grid_item_listener(num_dimensions);
-    level++;
 }
 
 init();
