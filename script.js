@@ -150,7 +150,7 @@ function init(dimensions){
 // initialize game
 function restart(dimensions){
     num_dimensions = dimensions;
-    console.log(num_dimensions);
+    fraction_of_grid = 6;
     points = 0;
     document.getElementById("title").innerHTML = "PUNKTE: " + (points)
     remove_divs("grid-item");
