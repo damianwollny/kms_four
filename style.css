@@ -1,15 +1,24 @@
+html {
+    background-color: rgb(255, 255, 255);
+    /* aligning the everything in the center of the body:*/
+    display: grid;
+    justify-items: center;
+}
+
 .all-containers {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 .grid-container {
     display: grid;
-    gap: 2px;
+    gap: 5px;
     width: 250px;
     height: 250px;
     padding: 10px;
 }
 .grid-item {
     display: grid;
-    border: 1px solid black;
+    /*border: .1px solid white;*/
+    border-radius: 15%;
 }
+

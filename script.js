@@ -43,7 +43,7 @@ function newgriditem(dim){
             // right grid has id's: 1-[1:x]
             griditem.setAttribute("id", classmember+"-"+gridnum);
             grid[classmember].appendChild(griditem);
-            //console.log(griditem)
+            console.log(griditem)
         }
     }
 }
@@ -57,16 +57,26 @@ function remove_divs(classname){
     uniq = [];
 }
 
-// color grid_item in left grid
+// color grid_item of grids
 function color_grid_items(dim, frac){
+    // first, color all items from left grid in green with low opacity
+    for (let gridnum = 1; gridnum < (dim ** 2)+1; gridnum++) {
+        document.getElementById("0-"+gridnum).style.backgroundColor = "rgba(120, 220, 142, 0.1)";
+        document.getElementById("0-"+gridnum).style.border = "0.5px solid grey";
+    }
+    // first, color all items from right grid in red with low opacity
+    for (let gridnum = 1; gridnum < (dim ** 2)+1; gridnum++) {
+        document.getElementById("1-"+gridnum).style.backgroundColor = "rgba(238, 121, 114, 0.1)";
+        document.getElementById("1-"+gridnum).style.border = "0.5px solid grey";
+    }
     // generate an array of random numbers < grid.length
     const ranarray = Array.from({length: (dim ** 2)/frac}, () => Math.floor(Math.random() * dim ** 2)+1);
     // remove duplicates from array
     uniq = [...new Set(ranarray)];
     // color griditems in left grid
     for (let gridnum = 0; gridnum < uniq.length; gridnum++) {
-        document.getElementById("0-"+uniq[gridnum]).style.backgroundColor = "green";
-        
+        document.getElementById("0-"+uniq[gridnum]).style.backgroundColor = "#78DC8E";
+        document.getElementById("0-"+uniq[gridnum]).style.opacity = "1";
     }
     return uniq
 }
@@ -94,12 +104,13 @@ function colorbyuser(elem){
     // get current color of grit item
     style = window.getComputedStyle(clicked_item);
     circ_bg = style.getPropertyValue("background-color");
-    if (circ_bg == "rgba(0, 0, 0, 0)") {
-        clicked_item.style.backgroundColor = "#d00000";
+    console.log(circ_bg)
+    if (circ_bg == "rgba(238, 121, 114, 0.1)") {
+        clicked_item.style.backgroundColor = "#EE7972";
         // add grid item to array
         red_array.push(elem);
-    }else if (circ_bg == "rgb(208, 0, 0)"){
-        clicked_item.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    }else if (circ_bg == "rgb(238, 121, 114)"){
+        clicked_item.style.backgroundColor = "rgba(238, 121, 114, 0.1)";
         // remove grid item from array
         red_array = red_array.filter(function(item) {return item !== elem}) 
     }
@@ -172,13 +183,13 @@ function next_level(){
     if (num_dimensions == 2) {
         points++;
     } else if (num_dimensions == 3) {
-        points = points + 10
-    } else if (num_dimensions == 4) {
         points = points + 20
-    } else if (num_dimensions == 5) {
+    } else if (num_dimensions == 4) {
         points = points + 30
-    } else if (num_dimensions == 6) {
+    } else if (num_dimensions == 5) {
         points = points + 50
+    } else if (num_dimensions == 6) {
+        points = points + 100
     }
     console.log("num_dim=", num_dimensions)
     console.log("points=", points)
