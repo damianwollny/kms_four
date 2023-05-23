@@ -117,8 +117,6 @@ function compareArrays(arr1, arr2){
     tilted_green = [];
     for (let p = 0; p < uniq.length; p++) {
         tilted_green.push(trans_left_grid.indexOf(uniq[p])+1);
-        console.log("uniq=", uniq)
-        console.log("uniq[p]=", uniq[p])
         console.log("tilted_green=", tilted_green)
     }
     console.log("original green = ", uniq, "tilted green=", tilted_green, "red=", red_clean)
@@ -137,7 +135,8 @@ function change_dim(dimensions){
 }
 
 // initialize game
-function init(dimensions){
+function init(){
+    console.log("fraction of grid=", fraction_of_grid)
     points = 0;
     document.getElementById("title").innerHTML = "PUNKTE: " + (points)
     remove_divs("grid-item");
@@ -147,10 +146,15 @@ function init(dimensions){
     grid_item_listener(num_dimensions);
 }
 
-// initialize game
+// restart game
 function restart(dimensions){
     num_dimensions = dimensions;
     fraction_of_grid = 6;
+    if (num_dimensions > 2) {
+        fraction_of_grid = fraction_of_grid
+    }else{
+        fraction_of_grid = 2;
+    }
     points = 0;
     document.getElementById("title").innerHTML = "PUNKTE: " + (points)
     remove_divs("grid-item");
@@ -158,6 +162,8 @@ function restart(dimensions){
     newgriditem(num_dimensions);
     color_grid_items(num_dimensions, fraction_of_grid);
     grid_item_listener(num_dimensions);
+    console.log("fraction of grid=", fraction_of_grid)
+    console.log("green position=",uniq[0])
 }
 
 // level up
@@ -176,19 +182,15 @@ function next_level(){
     }
     console.log("num_dim=", num_dimensions)
     console.log("points=", points)
-    // difficulty increases unless num_dim == 2
-    if (fraction_of_grid > 2) {
-        fraction_of_grid = fraction_of_grid - 0.5;
-    }else{
-        fraction_of_grid = 2;
-    }
     document.getElementById("title").innerHTML = "PUNKTE: " + (points)
     remove_divs("grid-item");
     setdimensions(num_dimensions);
     newgriditem(num_dimensions);
+    // difficulty increases unless num_dim == 2
     if (num_dimensions == 2) {
-        color_grid_items(num_dimensions, 3);    
+        color_grid_items(num_dimensions, 2);    
     }else{
+        fraction_of_grid = fraction_of_grid - 0.5;
         color_grid_items(num_dimensions, fraction_of_grid);    
     }
     grid_item_listener(num_dimensions);
