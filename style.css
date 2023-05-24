@@ -1,8 +1,105 @@
+.all {
+    display: grid;
+    justify-items: center;  
+}
+
+.text{
+    color: #4c4c4c; font-family: 'Lato', sans-serif; font-size: 40px; font-weight: 200; line-height: 58px; margin: 0 0 20px;
+}
+
 html {
     background-color: rgb(255, 255, 255);
     /* aligning the everything in the center of the body:*/
     display: grid;
     justify-items: center;
+}
+
+.difficulty_container {
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    gap: 10px;
+}
+
+#diff1 {
+    background-color: #FFFFB2;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#diff2 {
+    background-color: #FECC5C;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#diff3 {
+    background-color: #FD8D3C;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#diff4 {
+    background-color: #F03B20;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 5px;
+}
+#diff5 {
+    background-color: #BD0026;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+
+#restart_button {
+    background-color: white;
+    border: 1px solid grey;
+    color: black;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+#test_button {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
 }
 
 .all-containers {
