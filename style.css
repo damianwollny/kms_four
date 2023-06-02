@@ -104,7 +104,8 @@ html {
 
 .all-containers {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr .1fr 1fr;
+    align-items: center;
 }
 .grid-container {
     display: grid;
@@ -118,4 +119,3 @@ html {
     /*border: .1px solid white;*/
     border-radius: 15%;
 }
-
