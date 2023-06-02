@@ -43,7 +43,6 @@ function newgriditem(dim){
             // right grid has id's: 1-[1:x]
             griditem.setAttribute("id", classmember+"-"+gridnum);
             grid[classmember].appendChild(griditem);
-            console.log(griditem)
         }
     }
 }
@@ -89,7 +88,6 @@ function transform(arr, dim) {
         for(var i = 0; i < arr.length; i+= dim) {
             matrix.push(arr.slice(i, dim + i));
         }
-        console.log(matrix);
     }else{
         alert("Transformation error")
     }
@@ -104,7 +102,6 @@ function colorbyuser(elem){
     // get current color of grit item
     style = window.getComputedStyle(clicked_item);
     circ_bg = style.getPropertyValue("background-color");
-    console.log(circ_bg)
     if (circ_bg == "rgba(238, 121, 114, 0.1)") {
         clicked_item.style.backgroundColor = "#EE7972";
         // add grid item to array
@@ -128,14 +125,13 @@ function compareArrays(arr1, arr2){
     tilted_green = [];
     for (let p = 0; p < uniq.length; p++) {
         tilted_green.push(trans_left_grid.indexOf(uniq[p])+1);
-        console.log("tilted_green=", tilted_green)
     }
     console.log("original green = ", uniq, "tilted green=", tilted_green, "red=", red_clean)
     if (JSON.stringify(tilted_green.sort()) === JSON.stringify(red_clean.sort())){
         next_level();
     }else{
         alert("PUNKTE: " + points);
-        init();
+        restart(num_dimensions);
     }
     red_array = [];
 }
@@ -202,6 +198,10 @@ function next_level(){
         color_grid_items(num_dimensions, 2);    
     }else{
         fraction_of_grid = fraction_of_grid - 0.5;
+        if (fraction_of_grid <= 1.5) {
+            fraction_of_grid = 1.5
+        }
+        console.log("new fraction of grid", fraction_of_grid)
         color_grid_items(num_dimensions, fraction_of_grid);    
     }
     grid_item_listener(num_dimensions);

@@ -1,5 +1,5 @@
 # kms_four
  
 TO DO:
-- fix bug for points > 200
+- mark the difficulty level you are currently at (?)
 - if user makes wrong choice: show the correct one (?)
